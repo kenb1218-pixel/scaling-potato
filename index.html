@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>桃園 ✈ 釜山 航班比價</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="logo">✈ FlightCompare</div>
+      <nav>
+        <a href="#">首頁</a>
+        <a href="#">我的行程</a>
+        <a href="#">優惠資訊</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero Search -->
+  <section class="hero">
+    <div class="hero-content">
+      <h1>桃園 → 釜山 航班搜尋</h1>
+      <p class="subtitle">比較各大航空公司票價，找到最划算的班機</p>
+      <div class="search-bar">
+        <div class="search-field">
+          <label>出發地</label>
+          <input type="text" value="桃園 (TPE)" readonly />
+        </div>
+        <div class="swap-btn" title="交換">⇄</div>
+        <div class="search-field">
+          <label>目的地</label>
+          <input type="text" value="釜山 (PUS)" readonly />
+        </div>
+        <div class="search-field">
+          <label>出發日期</label>
+          <input type="date" id="depart-date" />
+        </div>
+        <div class="search-field">
+          <label>回程日期</label>
+          <input type="date" id="return-date" />
+        </div>
+        <div class="search-field">
+          <label>乘客</label>
+          <select id="passengers">
+            <option>1 位成人</option>
+            <option>2 位成人</option>
+            <option>3 位成人</option>
+            <option>4 位成人</option>
+          </select>
+        </div>
+        <button class="search-btn" onclick="searchFlights()">搜尋航班</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Filter & Sort Bar -->
+  <section class="filter-bar" id="filter-bar">
+    <div class="filter-inner">
+      <div class="filter-group">
+        <span class="filter-label">排序：</span>
+        <button class="filter-btn active" onclick="sortBy('price')">價格最低</button>
+        <button class="filter-btn" onclick="sortBy('duration')">飛行時間</button>
+        <button class="filter-btn" onclick="sortBy('depart')">出發時間</button>
+        <button class="filter-btn" onclick="sortBy('arrive')">抵達時間</button>
+      </div>
+      <div class="filter-group">
+        <span class="filter-label">航空公司：</span>
+        <label class="checkbox-label"><input type="checkbox" checked onchange="filterAirline(this, 'CI')" /> 中華航空</label>
+        <label class="checkbox-label"><input type="checkbox" checked onchange="filterAirline(this, 'BR')" /> 長榮航空</label>
+        <label class="checkbox-label"><input type="checkbox" checked onchange="filterAirline(this, 'IT')" /> 台灣虎航</label>
+        <label class="checkbox-label"><input type="checkbox" checked onchange="filterAirline(this, 'KE')" /> 大韓航空</label>
+        <label class="checkbox-label"><input type="checkbox" checked onchange="filterAirline(this, '7C')" /> 濟州航空</label>
+        <label class="checkbox-label"><input type="checkbox" checked onchange="filterAirline(this, 'BX')" /> 釜山航空</label>
+        <label class="checkbox-label"><input type="checkbox" checked onchange="filterAirline(this, 'TW')" /> T'way 航空</label>
+      </div>
+      <div class="filter-group">
+        <span class="filter-label">艙等：</span>
+        <button class="filter-btn active" onclick="filterCabin('all', this)">全部</button>
+        <button class="filter-btn" onclick="filterCabin('economy', this)">經濟艙</button>
+        <button class="filter-btn" onclick="filterCabin('business', this)">商務艙</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Results -->
+  <main class="results-container">
+
+    <!-- Stats Bar -->
+    <div class="stats-bar" id="stats-bar">
+      <span id="result-count">共找到 <strong>14</strong> 個航班</span>
+      <span class="stats-divider">|</span>
+      <span>最低票價：<strong class="price-highlight" id="min-price">NT$ 3,200</strong></span>
+      <span class="stats-divider">|</span>
+      <span>平均票價：<strong id="avg-price">NT$ 6,850</strong></span>
+    </div>
+
+    <!-- Price Calendar Strip -->
+    <div class="price-calendar">
+      <div class="cal-label">近期低價日曆</div>
+      <div class="cal-scroll" id="cal-scroll"></div>
+    </div>
+
+    <!-- Flight Cards -->
+    <div id="flight-list"></div>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <p>票價為即時資訊，實際價格以各航空公司官網為準。資料更新時間：<span id="update-time"></span></p>
+    <p>© 2026 FlightCompare · 桃園 TPE ↔ 釜山 PUS</p>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
